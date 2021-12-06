@@ -13,13 +13,14 @@ import kotlinx.coroutines.launch
 
 class UserViewModel(application: Application): AndroidViewModel(application) {
 
+    private val practicandoRama: UserRepository
     private val readAllData: LiveData<List<User>>
     private val repository: UserRepository
 
-    //agrego uns comentarios para practicar el git merge por consola
     init {
         val userDao = UserDataBase.getDataBase(application).userDao()
         repository = UserRepository(userDao)
+        practicandoRama = UserRepository(userDao)
         readAllData = repository.readAllData
     }
 
