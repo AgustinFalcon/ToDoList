@@ -16,7 +16,7 @@ class UserViewModel(application: Application): AndroidViewModel(application) {
     private val readAllData: LiveData<List<User>>
     private val repository: UserRepository
 
-
+    //agrego uns comentarios para practicar el git merge por consola
     init {
         val userDao = UserDataBase.getDataBase(application).userDao()
         repository = UserRepository(userDao)
