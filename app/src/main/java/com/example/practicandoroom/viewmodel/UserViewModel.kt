@@ -4,26 +4,35 @@ import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.viewModelScope
-import com.example.practicandoroom.data.UserDataBase
+import com.example.practicandoroom.data.HelperDataBase
 import com.example.practicandoroom.data.entities.User
 import com.example.practicandoroom.repository.UserRepository
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class UserViewModel(application: Application): AndroidViewModel(application) {
+//el application le da el context para el HelperDataBase
+class UserViewModel(application: Application): AndroidViewModel(application){
 
     private val readAllData: LiveData<List<User>>
     private val repository: UserRepository
 
     init {
-        val userDao = UserDataBase.getDataBase(application).userDao()
-        repository = UserRepository(userDao)
+        val userDao = HelperDataBase.getDataBase(application).userDao() //Recibe la instancia de la database
+        repository = UserRepository(userDao = userDao)
         readAllData = repository.readAllData
     }
 
     fun addUser(user: User){
-        viewModelScope.launch(Dispatchers.IO) {
-            repository.addUser(user)
+        viewModelScope.launch(Dispatchers.IO){
+            repository.addUser(user = user)
         }
     }
+
+    fun deleteUser(id: Int){
+        viewModelScope.launch(Dispatchers.IO){
+            repository.deleteUser(id = id)
+        }
+    }
+
 }
