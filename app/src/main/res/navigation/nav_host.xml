@@ -7,16 +7,21 @@
 
     <fragment
         android:id="@+id/listFragment"
-        android:name="com.example.practicandoroom.ListFragment"
-        android:label="fragment_list"
+        android:name="com.example.practicandoroom.fragments.list.ListFragment"
+        android:label="List"
         tools:layout="@layout/fragment_list" >
         <action
             android:id="@+id/action_listFragment_to_addFragment"
             app:destination="@id/addFragment" />
     </fragment>
+
     <fragment
         android:id="@+id/addFragment"
-        android:name="com.example.practicandoroom.AddFragment"
-        android:label="fragment_add"
-        tools:layout="@layout/fragment_add" />
+        android:name="com.example.practicandoroom.fragments.add.AddFragment"
+        android:label="Add"
+        tools:layout="@layout/fragment_add" >
+        <action
+            android:id="@+id/action_addFragment_to_listFragment"
+            app:destination="@id/listFragment" />
+    </fragment>
 </navigation>

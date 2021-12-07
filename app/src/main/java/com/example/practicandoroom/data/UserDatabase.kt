@@ -10,16 +10,16 @@ import com.example.practicandoroom.data.entities.User
 
 
 @Database(entities = [User::class], version = 1, exportSchema = false)
-abstract class HelperDataBase: RoomDatabase(){
+abstract class UserDatabase: RoomDatabase(){
 
     abstract fun userDao(): UserDao
 
     companion object{
         @Volatile
-        private var INSTANCE: HelperDataBase? = null //Singelton
+        private var INSTANCE: UserDatabase? = null //Singelton
 
         //si no existe una instancia crea una y en otro hilo le da el valor de la misma
-        fun getDataBase(context: Context): HelperDataBase{
+        fun getDatabase(context: Context): UserDatabase{
             val tempInstance = INSTANCE
 
             if(tempInstance != null){
@@ -29,7 +29,7 @@ abstract class HelperDataBase: RoomDatabase(){
             synchronized(this){
                 val instance = Room.databaseBuilder(
                     context.applicationContext,
-                    HelperDataBase::class.java,
+                    UserDatabase::class.java,
                     "helper_database"
                 ).build()
                 INSTANCE = instance

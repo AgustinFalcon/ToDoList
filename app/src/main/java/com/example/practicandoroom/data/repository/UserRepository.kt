@@ -1,4 +1,4 @@
-package com.example.practicandoroom.repository
+package com.example.practicandoroom.data.repository
 
 import androidx.lifecycle.LiveData
 import com.example.practicandoroom.data.daos.UserDao
@@ -8,7 +8,7 @@ class UserRepository(private val userDao: UserDao) {
 
     val readAllData: LiveData<List<User>> = userDao.readAllData()
 
-    suspend fun addUser(user: User){
+    fun addUser(user: User){
         userDao.addUser(user)
     }
 
